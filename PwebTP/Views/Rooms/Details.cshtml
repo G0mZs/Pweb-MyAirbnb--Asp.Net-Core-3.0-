@@ -1,0 +1,368 @@
+﻿
+@model PwebTP.ViewModels.RoomDetailsViewModel
+
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+   
+}
+
+
+
+<div class="container mb-3 mt-3 pad">
+    <h2>Details of @Model.Room.Title</h2>
+    <div class="main" style="width:100%">
+        <hr style="padding-bottom:16px" />
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="7000" style="width:60%; height:60%;float:left">
+            <div class="carousel-inner">
+                <img class="img-fluid" src="@Model.Room.CoverImgPath" style="border-radius:10px; object-fit:cover; width:100%; height:400px " />
+               
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <div class="card" style="width: 38%;height:400px; float:right; border-radius:10px;box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.5);">
+            <div class="card-body">
+                <h5 class="card-title" style="font-weight:bolder;font-size:20px;display:inline-block">€@Model.Room.PricePerNight</h5><i>/Night</i><a style="float:right;font-size:12px">@Model.RoomReviews.Count comments</a>
+                <hr style="width:100%;color:lightgrey" />
+
+
+                <h3 style="font-weight:bolder">Host Informations</h3>
+                <h6>Name:       @Model.Room.Host.Name</h6>
+                <h6>Email:      @Model.Room.Host.Email</h6>
+                <h6>Contact:    @Model.Room.Host.PhoneNumber</h6>
+                <h6 style="padding-bottom:10px">Reviews: </h6>
+                <hr style="width:100%;color:lightgrey" />
+
+            </div>
+            <div class="card-footer">
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Client"))
+                {
+                    <a class="btn btn-dark btn-block" style="align-content:center" asp-controller="Reservations" asp-action="Create" asp-route-id="@Model.Room.RoomsId">Reserve</a>
+                }
+                else
+                {
+                    <a class="btn btn-dark btn-block disabled" style="align-content:center" asp-controller="Reservations" asp-action="Create" asp-route-id="@Model.Room.RoomsId">Reserve</a>
+                }
+            </div>
+        </div>
+
+    </div>
+
+    <div class="info" style="width:60%; height:100%;">
+        <h3>@Model.Room.RoomType hosted by @Model.Room.Host.Name</h3>
+        <h5>@Model.Room.NumberOfGuests Guests - @Model.Room.NumberofRooms Bedrooms - @Model.Room.NumberofBathrooms Bathrooms</h5>
+        <hr style="border-color:lightgrey" />
+        <h3>What this space offers</h3>
+        <dl class="row">
+
+            <dd class="col-sm-10">
+                @if (Model.Room.HasTv == true)
+                {
+                    <div class="date">
+                        <i class="fas fa-tv" aria-hidden="true"></i>
+                        <p style="display: inline-block">Television</p>
+                    </div>
+                }
+                @if (Model.Room.HasInternet == true)
+                {
+                    <div class="date">
+                        <i class="fas fa-wifi" aria-hidden="true"></i>
+                        <p style="display: inline-block">Wifi</p>
+                    </div>
+                }
+                @if (Model.Room.HasHeating == true)
+                {
+                    <div class="date">
+                        <i class="fab fa-hotjar" aria-hidden="true"></i>
+                        <p style="display: inline-block">Heating</p>
+                    </div>
+                }
+                @if (Model.Room.HasAirConditioner == true)
+                {
+                    <div class="date">
+                        <i class="fas fa-wind" aria-hidden="true"></i>
+                        <p style="display: inline-block">Air Conditioner</p>
+                    </div>
+                }
+                @if (Model.Room.HasDailyCleaning == true)
+                {
+                    <div class="date">
+                        <i class="fas fa-broom" aria-hidden="true"></i>
+                        <p style="display: inline-block">Daily and Advanced Cleaning</p>
+                    </div>
+                }
+                @if (Model.Room.HasCleaningProducts == true)
+                {
+                    <div class="date">
+                        <i class="fas fa-shower" aria-hidden="true"></i>
+                        <p style="display: inline-block">Cleaning Products</p>
+                    </div>
+                }
+                @if (Model.Room.HasFreeParking == true)
+                {
+                    <div class="date">
+                        <i class="fas fa-parking" aria-hidden="true"></i>
+                        <p style="display: inline-block">Free Parking</p>
+                    </div>
+                }
+            </dd>
+        </dl>
+        <hr style="border-color:lightgrey" />
+        <h3>Description</h3>
+        <dl class="row">
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Room.Description)
+            </dd>
+        </dl>
+    </div>
+
+    <hr style="border-color:lightgrey" />
+    <section id="testimonials">
+
+        <div class="testimonial-heading">
+            <span>Comments</span>
+
+            @if(User.IsInRole("Client"))
+            {
+                <a asp-controller="Reviews" asp-action="Create" asp-route-id="@Model.Room.RoomsId">Add a Comment</a>
+            }
+             
+ 
+            <h1>Clients Say</h1>
+
+        </div>
+
+
+        <div class="testimonial-box-container">
+
+            @foreach (var item in Model.RoomReviews)
+            {
+                <div class="testimonial-box">
+                    <div class="box-top">
+                        <div class="profile">
+                            <div class="profile-img">
+                                <img src="~/img/profile.png" />
+                            </div>
+                            <div class="name-user">
+                                <strong>@item.Reviewer.Name</strong>
+                                <span>@item.Reviewer.UserName</span>
+                            </div>
+                        </div>
+
+                        <div class="reviews">
+                            <b><span id=stars></span></b>
+                            <script>
+
+                                document.getElementById("stars").innerHTML = getStars(@item.TotalRating);
+
+                                function getStars(rating) {
+
+                                    // Round to nearest half
+                                    rating = Math.round(rating * 2) / 2;
+                                    let output = [];
+
+                                    // Append all the filled whole stars
+                                    for (var i = rating; i >= 1; i--)
+                                        output.push('<i class="fa fa-star" aria-hidden="true" style="color: gold;"></i>&nbsp;');
+
+                                    // If there is a half a star, append it
+                                    if (i == .5) output.push('<i class="fa fa-star-half-o" aria-hidden="true" style="color: gold;"></i>&nbsp;');
+
+                                    // Fill the empty stars
+                                    for (let i = (5 - rating); i >= 1; i--)
+                                        output.push('<i class="fa fa-star-o" aria-hidden="true" style="color: gold;"></i>&nbsp;');
+
+                                    return output.join('');
+
+                                }
+
+                            </script>
+                        </div>
+
+
+                    </div>
+                    <div class="client-comment">
+                        <p>@item.Comment</p>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+
+    </section>
+
+    <hr style="border-color:lightgrey" />
+    <h3>Location</h3>
+    <div id="map">
+        <iframe src="https://maps.google.com/maps?q=@Model.Room.Latitude,@Model.Room.Longitude&z=15&output=embed" height="400" style="border:0; width:100%; border-radius:10px"></iframe>
+    </div>
+
+</div>
+
+
+
+
+
+
+<style>
+
+
+    h3 {
+        padding-top: 8px;
+        padding-bottom: 10px;
+        font-family: 'Playfair Display';
+    }
+
+    .info hr {
+        border-top: 2px solid #b4b4b4;
+        width: 100%;
+        margin-top: .3rem;
+        margin-bottom: 1rem;
+    }
+
+    h5 {
+        font-family: Arial;
+        font-weight: 300;
+        font-size: 15px;
+    }
+
+    h4 {
+        font-family: Arial;
+        font-weight: 700;
+        font-size: 20px;
+        padding-bottom: 1px;
+    }
+
+    #carouselExampleControls {
+        padding-bottom: 20px;
+    }
+
+
+
+
+    h2 {
+        padding-top: 1em;
+        padding-bottom: 10px;
+        font-family: 'Playfair Display';
+    }
+
+    .pad hr {
+        border-top: 2px solid #b4b4b4;
+        width: 100%;
+        margin-top: .3rem;
+        margin-bottom: 1rem;
+    }
+
+    #testimonials {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .testimonial-heading {
+        letter-spacing: 1px;
+        margin: 30px 0px;
+        padding: 10px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .testimonial-heading h1 {
+            font-size: 2.2rem;
+            font-weight: 500;
+            background-color: #202020;
+            color: #ffffff;
+            padding: 10px 20px;
+        }
+
+        .testimonial-heading span {
+            font-size: 1.3rem;
+            color: #252525;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+    .testimonial-box {
+        width: 500px;
+        box-shadow: 2px 2px 30px rgba(0,0,0,0.1);
+        background-color: #ffffff;
+        padding: 20px;
+        margin: 15px;
+        cursor: pointer;
+    }
+
+    .profile-img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 10px;
+    }
+
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+    .profile {
+        display: flex;
+        align-items: center;
+    }
+
+    .name-user {
+        display: flex;
+        flex-direction: column;
+    }
+
+        .name-user strong {
+            color: #3d3d3d;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .name-user span {
+            color: #979797;
+            font-size: 0.8rem;
+        }
+
+    .testimonial-box-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .box-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .client-comment p {
+        font-size: 0.9rem;
+        color: #4b4b4b;
+    }
+
+    .testimonial-box:hover {
+        transform: translateY(-10px);
+        transition: all ease 0.3s;
+    }
+</style>

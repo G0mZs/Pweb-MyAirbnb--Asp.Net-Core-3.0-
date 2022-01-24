@@ -1,0 +1,183 @@
+﻿@model PwebTP.Models.Rooms
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <div class="container mt-3 mb-3">
+        <h1>Create a Room</h1>
+        @Html.ValidationSummary()
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Create" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Title" class="control-label"></label>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="RoomType" class="control-label"></label>
+                        <select asp-for="RoomType" class="form-control" asp-items="ViewBag.RoomType"></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NumberOfGuests" class="control-label"></label>
+                        <input asp-for="NumberOfGuests" class="form-control" />
+                        <span asp-validation-for="NumberOfGuests" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NumberofRooms" class="control-label"></label>
+                        <input asp-for="NumberofRooms" class="form-control" />
+                        <span asp-validation-for="NumberofRooms" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NumberofBathrooms" class="control-label"></label>
+                        <input asp-for="NumberofBathrooms" class="form-control" />
+                        <span asp-validation-for="NumberofBathrooms" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PricePerNight" class="control-label"></label>
+                        <input asp-for="PricePerNight" class="form-control" />
+                        <span asp-validation-for="PricePerNight" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CityName" class="control-label"></label>
+                        <input asp-for="CityName" class="form-control" />
+                        <span asp-validation-for="CityName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PostalCode" class="control-label"></label>
+                        <input asp-for="PostalCode" class="form-control" />
+                        <span asp-validation-for="PostalCode" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StreetName" class="control-label"></label>
+                        <input asp-for="StreetName" class="form-control" />
+                        <span asp-validation-for="StreetName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StreetNumber" class="control-label"></label>
+                        <input asp-for="StreetNumber" class="form-control" />
+                        <span asp-validation-for="StreetNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CountryName" class="control-label"></label>
+                        <input asp-for="CountryName" class="form-control" />
+                        <span asp-validation-for="CountryName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Latitude" class="control-label"></label>
+                        <input asp-for="Latitude" class="form-control" />
+                        <span asp-validation-for="Latitude" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Longitude" class="control-label"></label>
+                        <input asp-for="Longitude" class="form-control" />
+                        <span asp-validation-for="Longitude" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" enctype="multipart/form-data">
+                        <label asp-for="CoverImg" class="control-label"></label>
+                        <div class="custom-file">
+                            <input asp-for="CoverImg" class="custom-file-input" id="custom" />
+                            <label class="custom-file-label" for="custom">Choose File</label>
+                        </div>
+                        <span asp-validation-for="CoverImg" class="text-danger"></span>
+                    </div>
+                    <script>
+                        $('#custom').on('change', function () {
+                            //get the file name
+                            var fileName = $(this).val();
+                            //replace the "Choose a file" label
+                            $(this).next('.custom-file-label').html(fileName);
+                        })
+                    </script>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="HasInternet" /> @Html.DisplayNameFor(model => model.HasInternet)
+                        </label>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="HasDailyCleaning" /> @Html.DisplayNameFor(model => model.HasDailyCleaning)
+                        </label>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="HasCleaningProducts" /> @Html.DisplayNameFor(model => model.HasCleaningProducts)
+                        </label>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="HasFreeParking" /> @Html.DisplayNameFor(model => model.HasFreeParking)
+                        </label>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="HasAirConditioner" /> @Html.DisplayNameFor(model => model.HasAirConditioner)
+                        </label>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="HasHeating" /> @Html.DisplayNameFor(model => model.HasHeating)
+                        </label>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="HasTv" /> @Html.DisplayNameFor(model => model.HasTv)
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-dark" /> |
+                        <a class="btn btn-dark" asp-action="ManagePortfolio">Back to Portoflio</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+<style>
+
+      h1{
+        padding-top:1em;
+        padding-bottom:10px;
+        font-family: 'Playfair Display';
+    }
+
+        .field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+
+select.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+</style>

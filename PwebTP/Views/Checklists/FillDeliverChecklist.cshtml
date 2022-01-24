@@ -1,0 +1,62 @@
+﻿@model PwebTP.ViewModels.CheckListProcedureViewModel
+
+@{
+    ViewData["Title"] = "FillDeliverChecklist";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="container mb-3 mt-3">
+        <h1>@Model.checklist.Name Space To Client</h1>
+
+        <h4>Checklist</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="FillDeliverChecklist">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="checklist.ChecklistId" />
+                    <input type="hidden" asp-for="checklist.RoomId" />
+                    <input type="hidden" asp-for="checklist.Name" />
+
+                    @foreach (var item in Model.procedures)
+                    {
+
+                        <input type="hidden" asp-for="@item.ProceduresId" />
+                        <input type="hidden" asp-for="@item.ChecklistId" />
+                        <input type="hidden" asp-for="@item.ProcedureName" />
+
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="@item.ProcedureResult" /> @Html.DisplayFor(model => item.ProcedureName)
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <input asp-controller="Procedure" type="submit" value="Update Procedure" class="btn btn-dark" />
+                        </div>
+                    }
+
+
+                    <div class="form-group">
+                        <label asp-for="checklist.Description" class="control-label"></label>
+                        <input asp-for="checklist.Description" class="form-control" />
+                        <span asp-validation-for="checklist.Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-dark" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <a asp-controller="Reservations" asp-action="ListReservations">Back to List</a>
+        </div>
+    </div>
+
+<style>
+    h1 {
+        padding-top: 1em;
+        font-family: 'Playfair Display';
+        padding-bottom:10px;
+    }
+</style>

@@ -1,0 +1,116 @@
+﻿@model PwebTP.Models.Rooms
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <div class="container mb-3 mt-3">
+        <h1>Delete</h1>
+
+        <h3>Are you sure you want to delete this?</h3>
+        <div>
+            <h4>Rooms</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Host)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Host.Id)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.NumberOfGuests)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.NumberOfGuests)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.NumberofRooms)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.NumberofRooms)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.PricePerNight)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.PricePerNight)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Title)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Title)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CityName)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CityName)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.PostalCode)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.PostalCode)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.StreetName)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.StreetName)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.StreetNumber)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.StreetNumber)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CountryName)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CountryName)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Latitude)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Latitude)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Longitude)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Longitude)
+                </dd>
+            </dl>
+
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="RoomsId" />
+                <input type="submit" value="Delete" class="btn btn-dark" /> |
+                <a asp-action="ManagePortfolio">Back to Portoflio</a>
+            </form>
+        </div>
+    </div>
+
+<style>
+    h1{
+        padding-top: 1em;
+        padding-bottom: 10px;
+        font-family: 'Playfair Display';
+    }
+
+    h3{
+        padding-bottom: 10px;
+        font-family: 'Playfair Display';
+    }
+
+    h4{
+        padding-top: 1em;
+        font-family: 'Playfair Display';
+    }
+
+</style>

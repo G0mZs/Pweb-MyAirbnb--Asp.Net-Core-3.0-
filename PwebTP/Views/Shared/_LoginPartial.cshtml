@@ -1,0 +1,96 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using PwebTP.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+    <ul class="navbar-nav">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <li class="logged">
+                <a class="hello" asp-controller="User" asp-action="Details">Hello @User.Identity.Name</a>
+                <form method="post" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" >
+                    <button class="logout">Logout</button>
+                </form>
+            </li>
+        }
+        else
+        {
+
+
+            <li class="reg">
+                <a class="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                <a class="login"  asp-area="Identity" asp-page="/Account/Login">Login</a>
+            </li>
+
+        }
+    </ul>
+
+<style>
+    .logged{
+        display:flex;
+    }
+
+   
+    .logged a{
+        color:#FFFFFF;
+        font-size: 12px;
+        text-decoration: none;
+        font-family:'Playfair Display';
+        margin-left: 15px;
+        margin-right: 15px;
+        
+    }
+    
+    .logout{
+        color:black;
+        font-size: 10px;
+        font-family:'Playfair Display';
+        margin-left: 15px;
+        margin-right: 15px;
+        background-color:white;
+        text-decoration: none;
+        text-transform:uppercase;
+        font-weight:bolder;
+    }
+
+    .sign{
+        float:right;
+    }
+    .reg a {
+        color: #FFFFFF;
+        font-size: 14px;
+        text-decoration: none;
+        font-family:'Playfair Display';
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    .sign a {
+        color: #FFFFFF;
+        font-size: 1em;
+        text-decoration: none;
+        font-family:'Playfair Display';
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    .sign form-button {
+        color: #FFFFFF;
+        font-size: 1em;
+        text-decoration: none;
+        font-family: 'Playfair Display';
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    .sign form {
+        color: #FFFFFF;
+        font-size: 1em;
+        text-decoration: none;
+        font-family: 'Playfair Display';
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+</style>
+

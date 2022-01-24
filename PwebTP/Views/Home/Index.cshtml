@@ -1,0 +1,155 @@
+﻿
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="home">
+    <div class="landing-text">
+        <h1>MY AIRBNB</h1>
+        <h3>You don't know where to go?</h3>
+        <a class="btn btn-dark btn-lg" asp-area="" asp-controller="Rooms" asp-action="Catalog">Get Started</a>
+    </div>
+</div>
+
+<div class="padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <img src="~/img/familia.jpg" style="border-radius:8px"/>
+            </div>
+            <div class="col-sm-6 text-center">
+                <h2 style="font-family:'Montserrat'; font-weight:300; color: #1d1d21;">About Us</h2>
+                <p class="lead" style="font-family:'Montserrat'; font-weight:300; color: #1d1d21;"> My AirBnb is a online marketplace that connects people who want to rent
+                out their homes with people who are looking for accommodations in specific locales.This website was developed by Bernardo Gomes and André Pascoa for the discipline of Web Programming</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <h4 style="font-family:'Montserrat'">Clean Air</h4>
+                <p style="font-family:'Montserrat'">All MyAirBnb's have a commitment to the Covid19 security protocol, for that all accommodations have a detailed pre and post stay cleaning.</p>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <img src="~/img/clean_air.png" class="img-fluid" />
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <h4 style="font-family:'Montserrat'">Reviews</h4>
+                <p style="font-family:'Montserrat'">The opinions of our customers are extremely valued, we hope that the stay in the accommodations will be to everyone's liking and with the greatest ease.</p>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <img src="~/img/Reviews.png" class="img-fluid" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="fixed">
+</div>
+
+<div class="padding">
+    <div class="container">
+        <div class="row" style="width:100%">
+            <div class="col-sm-6 text-center" style="float:left;">
+                <h4 style="font-family: 'Montserrat'">Here's the cool thing about...</h4>
+                <p style="font-family: 'Montserrat'"> Reserve a Room in our Website dfjsdhfkksdfhdksjfdsfd</p>
+                <p style="font-family:'Montserrat'">SKRT SKRTd</p>
+            </div>
+            <div class="col-sm-6">
+                <div class="container-fluid "style="float:right">
+                    <div class="row">
+                        <div class="card">
+                            <img class="card-img-top" src="~/img/team4.jpg" />
+                            <div class="card-body">
+                                <h4 style="font-family:'Montserrat'" class="card-title">André Pascoa</h4>
+                                   
+                            </div>
+                        </div>                      
+                        <div class="card">
+                            <img class="card-img-top" src="~/img/team2.jpg" />
+                            <div class="card-body">
+                                <h4 style="font-family:'Montserrat'" class="card-title">Bernardo Gomes</h4>
+                                   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+     #home {
+        background: url(/img/modern.jpg) no-repeat center center fixed;
+        display: table;
+        height: 100%;
+        position: relative;
+        width: 100%;
+        background-size: cover;
+    }
+
+    .landing-text {
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+        .landing-text h1 {
+            font-family:'Playfair Display';
+            font-size: 400%;
+            font-weight: 700;
+            color: #1d1d21;
+        }
+
+        .landing-text h3 {
+            font-family:'Playfair Display';
+            color: #1d1d21;
+            padding-bottom:16px;
+        }
+
+        .landing-text a {
+           font-family:'Playfair Display';
+           color: whitesmoke;
+        }
+
+    .padding {
+        padding: 80px 0;
+    }
+
+        .padding img {
+            width: 100%;
+        }
+
+    #fixed {
+        background: url(img/airbnb.jpg) no-repeat center center fixed;
+        display: table;
+        height: 60%;
+        position: relative;
+        width: 100%;
+        background-size: cover;
+    }
+
+      .card {
+          margin-bottom: 10px;
+        padding: 8px 8px 8px 8px;
+        height: 50%;
+        width: 50%;
+    }
+
+        .card img {
+            height: 100%;
+            width: 100%;
+        }
+
+    .margin-cards {
+        padding-left: 12rem;
+        padding-right: 12rem;
+    }
+
+</style>

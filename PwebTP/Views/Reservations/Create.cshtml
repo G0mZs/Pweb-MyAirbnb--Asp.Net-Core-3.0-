@@ -1,0 +1,86 @@
+﻿@model PwebTP.Models.Reservations
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="container mb-3 mt-3">
+
+
+    <h1>Make Reservations</h1>
+    <hr />
+    @Html.ValidationSummary()
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" value="@ViewData["RoomId"]" asp-for="RoomId" />
+                <div class="form-group">
+                    <label asp-for="BeginsAt" class="control-label"></label>
+                    <input asp-for="BeginsAt" id="calendar" class="form-control" />
+                    <span asp-validation-for="BeginsAt" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EndsAt" class="control-label"></label>
+                    <input asp-for="EndsAt" id="calendar" class="form-control" />
+                    <span asp-validation-for="EndsAt" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="GuestsNumber" class="control-label"></label>
+                    <input asp-for="GuestsNumber" class="form-control" />
+                    <span asp-validation-for="GuestsNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-dark" />
+                </div>
+             
+            </form>
+        </div>
+    </div>
+  
+  
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>
+
+<style>
+
+    h1 {
+        padding-top: 1em;
+        font-family: 'Playfair Display';
+    }
+
+
+    .field-validation-error {
+        color: #b94a48;
+    }
+
+    .field-validation-valid {
+        display: none;
+    }
+
+    input.input-validation-error {
+        border: 1px solid #b94a48;
+    }
+
+
+    select.input-validation-error {
+        border: 1px solid #b94a48;
+    }
+
+    input[type="checkbox"].input-validation-error {
+        border: 0 none;
+    }
+
+    .validation-summary-errors {
+        color: #b94a48;
+    }
+
+    .validation-summary-valid {
+        display: none;
+    }
+</style>

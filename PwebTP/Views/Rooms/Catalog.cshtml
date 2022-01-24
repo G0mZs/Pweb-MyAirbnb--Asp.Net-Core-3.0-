@@ -1,0 +1,69 @@
+﻿@model IEnumerable<PwebTP.Models.Rooms>
+
+@{
+    ViewData["Title"] = "Catalog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="container mb-3 mt-3">
+  
+
+    <h2>Catalog of Rooms</h2>
+
+    <div class="row pad">
+        <hr />
+
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3">
+                <a asp-action="Details" asp-route-id="@item.RoomsId">
+                    <div class="room-top">
+                        <img src="@item.CoverImgPath" class="img-fluid rounded" />
+                    </div>
+                    <div class="room-bottom">
+                        <p style="float:left">@item.Title - @item.CityName,@item.CountryName</p>
+                        <p style="float:right">€@item.PricePerNight/Night</p>
+                    </div>
+                </a>
+            </div>
+        }
+
+
+
+    </div>
+</div>
+
+
+
+
+<style>
+
+    p {
+        font-family:'Montserrat';
+        font-size: 12px;
+        font-weight:500;
+        color:black;
+    }
+
+    h2 {
+        padding-top: 1em;
+        padding-bottom: 10px;
+        font-family: 'Playfair Display';
+    }
+
+    .pad hr {
+        border-top: 2px solid #b4b4b4;
+        width: 100%;
+        margin-top: .3rem;
+        margin-bottom: 1rem;
+    }
+
+    .room-top img {
+        float: left;
+        width: 300px;
+        height: 250px;
+        object-fit: cover;
+    }
+</style>

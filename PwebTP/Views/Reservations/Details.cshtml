@@ -1,0 +1,81 @@
+﻿@model PwebTP.Models.Reservations
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <div class="container mb-3 mt-3">
+        <h1>Details</h1>
+
+        <div>
+            <h4>Reservations</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Client)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Client.Id)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Client.Name)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Client.Name)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Room.Title)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Room.Title)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Room)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Room.RoomsId)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.BeginsAt)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.BeginsAt)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.EndsAt)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.EndsAt)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.GuestsNumber)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.GuestsNumber)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.TotalCost)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.TotalCost)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ReservationState)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.ReservationState)
+                </dd>
+            </dl>
+        </div>
+        <a asp-action="ListReservations">Back to List</a>
+    </div>
+
+    
+<style>
+    h1{
+        padding-top:1em;
+        font-family: 'Playfair Display';
+    }
+</style>

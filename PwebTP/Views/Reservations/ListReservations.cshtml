@@ -1,0 +1,207 @@
+﻿
+@model IEnumerable<PwebTP.Models.Reservations>
+
+@{
+    ViewData["Title"] = "ListReservations";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-3 mb-3">
+    <h1>Clients Reservations</h1>
+    <div class="table" style="padding:5rem;">
+        <table id="searchTable" class="table table-bordered table-hover table-sm">
+            <thead>
+                <tr>
+                    <th style="vertical-align:middle">
+                        Reservation Id
+                    </th>
+                    <th style="vertical-align:middle">
+                        Room Title
+                    </th>
+                    <th style="vertical-align:middle">
+                        Start Date
+                    </th>
+                    <th style="vertical-align:middle">
+                        End Date
+                    </th>
+                    <th style="vertical-align:middle">
+                        Number of Guests
+                    </th>
+                    <th style="vertical-align:middle">
+                        Total Cost
+                    </th>
+                    <th style="vertical-align:middle">Informations</th>
+                    <th style="vertical-align:middle">
+                        State
+                    </th>
+                    <th style="vertical-align:middle">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td style="vertical-align:middle">
+                        @Html.DisplayFor(modelItem => item.ReservationsId)
+                    </td>
+                    <td style="vertical-align:middle">
+                        @Html.DisplayFor(modelItem => item.Room.Title)
+                    </td>
+                    <td style="vertical-align:middle">
+                        @Html.DisplayFor(modelItem => item.BeginsAt)
+                    </td>
+                    <td style="vertical-align:middle">
+                        @Html.DisplayFor(modelItem => item.EndsAt)
+                    </td>
+                    <td style="vertical-align:middle">
+                        @Html.DisplayFor(modelItem => item.GuestsNumber)
+                    </td>
+                    <td style="vertical-align:middle">
+                        @Html.DisplayFor(modelItem => item.TotalCost)
+                    </td>
+                    <td style="vertical-align:middle">
+                        <a asp-action="Details" asp-route-id="@item.ReservationsId"> Details</a>
+                        <br><a asp-controller="User" asp-action="Details" asp-route-id="@item.ClientId">Client Data</a>
+                    </td>
+                    <td style="vertical-align:middle">
+                        @if (item.ReservationState.Equals("Pending"))
+                        {
+                            <span style="color:orange">@Html.DisplayFor(modelItem => item.ReservationState)</span>
+                        }
+                        @if (item.ReservationState.Equals("Declined"))
+                        {
+                            <span style="color:red">@Html.DisplayFor(modelItem => item.ReservationState)</span>
+                        }
+                        @if (item.ReservationState.Equals("Accepted"))
+                        {
+                            <span style="color:green">@Html.DisplayFor(modelItem => item.ReservationState)</span>
+                        }
+                    </td>
+                    <td>
+                        @if (item.ReservationState.Equals("Pending"))
+                        {
+                            <div class="overlay">
+                                <a class="btn btn-secondary" asp-action="Accept" asp-route-id="@item.ReservationsId"><i class="far fa-check-circle" style="color:forestgreen">Accept</i></a>
+                                <a class="btn btn-secondary" asp-action="Decline" asp-route-id="@item.ReservationsId"><i class="fas fa-ban" style="color:red">Decline</i></a>
+                            </div>
+                        }
+                        @if (item.ReservationState.Equals("Accepted"))
+                        {
+                            <div class="overlay">
+                                <a asp-controller="Checklists" asp-action="FillDeliverChecklist" asp-route-id="@item.RoomId">Deliver Room</a>
+                            </div>
+                        }
+                        @if (item.ReservationState.Equals("Delivered To Client"))
+                        {
+                            <div class="overlay">
+                                <a asp-controller="" asp-action="ReceiveFromClient" asp-route-id="@item.ReservationsId">Receive Room</a>
+                            </div>
+                        }
+
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+   
+
+
+
+    .overlay .btn-secondary{
+        background:transparent !important;
+        border:none !important;
+        box-shadow:none !important;
+    }
+
+    h1 {
+        padding-top: 1em;
+        padding-bottom: 10px;
+        font-family: 'Playfair Display';
+    }
+
+    .table {
+        background: #fff;
+        overflow-y: auto;
+        box-shadow: 0px 10px 50px 0px rgba(0,0,0,0.5);
+        border-radius: 5px;
+    }
+
+    table {
+        width: 100%;
+        text-align: center;
+        border-collapse: collapse;
+    }
+
+        table thead th,
+        table tbody td {
+            padding: 15px;
+            border: none;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        table thead th {
+            vertical-align: middle;
+            background: rgb(33,33,39);
+            background: linear-gradient(90deg, rgba(33,33,39,1) 0%, rgba(33,33,39,1) 100%, rgba(33,33,39,1) 100%);
+            color: white;
+            font-size: 16px;
+            position: sticky;
+            top: -1%;
+            font-family: 'Playfair Display';
+        }
+
+
+        table tbody td {
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+           
+        }
+
+    .page-item.active .page-link {
+        color: #fff !important;
+        background-color: #000 !important;
+        border-color: #000 !important;
+    }
+
+    .page-link {
+        color: #000 !important;
+        background-color: #fff !important;
+        border: 1px solid #dee2e6 !important;
+    }
+
+        .page-link:hover {
+            color: #fff !important;
+            background-color: #000 !important;
+            border-color: #000 !important;
+        }
+
+        
+</style>
+
+
+@section Scripts{
+
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+
+    <script>
+        $(document).ready(function () {
+
+            $('#searchTable').DataTable({
+
+                "scrollY": "450px",
+                "scrollCollapse": true,
+                "paging": true,
+                "ordering": false
+
+            });
+
+        });
+
+
+    </script>
+}
+

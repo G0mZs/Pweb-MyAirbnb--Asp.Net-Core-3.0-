@@ -1,0 +1,87 @@
+﻿@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+<body>
+
+    <div class="row pt-5">
+        <div class="col-md-4 offset-md-4">
+            <div class="card login-logout-tab">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link" href='/Identity/Account/Login'>Sign In</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href='/Identity/Account/Register'>Sign Up</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @RenderSection("Scripts", required: false);
+</body>
+</html>
+
+@section Scripts{
+
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+
+    <script>
+        $(function () {
+            var current = location.pathname;
+            $('.nav-tabs li a').each(function () {
+                var $this = $(this);
+                if (current.indexOf($this.attr('href')) !== -1) {
+                    $this.addClass('active');
+                }
+            })
+        })
+    </script>
+}
+
+<style>
+
+
+
+    div.login-logout-tab div.card-header {
+        padding: 0px 0px 12px 0px;
+    }
+
+    div.login-logout-tab ul.nav-tabs {
+        margin: 0px 0px -12px 0px;
+    }
+
+    div.login-logout-tab li.nav-item {
+        width: 50%;
+    }
+
+    div.login-logout-tab a.nav-link {
+        font-size: 25px;
+        color: #495057;
+        text-align: center;
+    }
+
+    div.card-content {
+        padding: 10px 20px;
+    }
+
+    div.login-form-icon {
+        text-align: center;
+    }
+
+    body {
+        background: #0F2027; /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027); /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+</style>
